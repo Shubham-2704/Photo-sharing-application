@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Edit Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Name Fields -->
+        <div class="form-group mt-4">
+            <label for="first_name">Usename</label>
+            <input type="text" name="username" class="form-control" value="{{ user.username }}" required>
+        </div>
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" class="form-control" value="{{ user.first_name }}" required >
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" class="form-control" value="{{ user.last_name }}" required>
+        </div>
+        <!-- Email Field -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" value="{{ user.email }}" required>
+        </div>
+        <!-- Profile Photo Field -->
+        <div class="form-group">
+            <label for="profile_photo">Profile Photo</label>
+            <input type="file" name="profile_photo" class="form-control-file">
+            {% if profile.profile_photo %}
+                <small class="text-muted">Current: <a href="{{ profile.profile_photo.url }}" target="_blank">{{ profile.profile_photo.name }}</a></small>
+            {% endif %}
+        </div>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+{% endblock %}
